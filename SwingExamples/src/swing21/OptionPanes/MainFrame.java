@@ -1,6 +1,7 @@
 package swing21.OptionPanes;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
@@ -11,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 public class MainFrame extends JFrame {
@@ -55,6 +57,7 @@ public class MainFrame extends JFrame {
 		add(textPanel, BorderLayout.CENTER);
 		add(formPanel, BorderLayout.WEST);
 
+		setMinimumSize(new Dimension(600, 500));
 		setSize(600, 500);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
@@ -98,7 +101,15 @@ public class MainFrame extends JFrame {
 
 		exitItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				String text = JOptionPane.showInputDialog(MainFrame.this, "Enter your username", "Enter Username",
+						JOptionPane.OK_OPTION | JOptionPane.INFORMATION_MESSAGE);
+				System.out.println(text);
+
+				int action = JOptionPane.showConfirmDialog(MainFrame.this,
+						"Do you really want to exit the application?", "Confirm Exit", JOptionPane.OK_CANCEL_OPTION);
+				if (action == JOptionPane.OK_OPTION) {
+					System.exit(0);
+				}
 			}
 		});
 
