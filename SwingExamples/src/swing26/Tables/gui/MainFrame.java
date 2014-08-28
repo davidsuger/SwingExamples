@@ -25,6 +25,7 @@ public class MainFrame extends JFrame {
 	private FormPanel formPanel;
 	private JFileChooser fileChooser;
 	private Controller controller;
+	private TablePanel tablePanel;
 
 	public MainFrame() {
 		super("Hello World");
@@ -34,11 +35,14 @@ public class MainFrame extends JFrame {
 		toolbar = new Toolbar();
 		textPanel = new TextPanel();
 		formPanel = new FormPanel();
+		tablePanel = new TablePanel();
 
 		fileChooser = new JFileChooser();
 		fileChooser.setFileFilter(new PersonFileFilter());
 
 		controller = new Controller();
+
+		tablePanel.setData(controller.getPeople());
 
 		toolbar.setStringListener(new StringListener() {
 			public void textEmitted(String text) {
@@ -49,13 +53,14 @@ public class MainFrame extends JFrame {
 		formPanel.setFormListener(new FormListener() {
 			public void formEventOccurred(FormEvent e) {
 				controller.addPerson(e);
+				tablePanel.refresh();
 			}
 		});
 
 		setJMenuBar(createMenuBar());
 
 		add(toolbar, BorderLayout.NORTH);
-		add(textPanel, BorderLayout.CENTER);
+		add(tablePanel, BorderLayout.CENTER);
 		add(formPanel, BorderLayout.WEST);
 
 		setMinimumSize(new Dimension(600, 500));

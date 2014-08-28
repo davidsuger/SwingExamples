@@ -1,5 +1,7 @@
 package swing26.Tables.controller;
 
+import java.util.List;
+
 import swing26.Tables.gui.FormEvent;
 import swing26.Tables.model.AgeCategory;
 import swing26.Tables.model.Database;
@@ -7,10 +9,12 @@ import swing26.Tables.model.EmploymentCategory;
 import swing26.Tables.model.Gender;
 import swing26.Tables.model.Person;
 
-
-
 public class Controller {
 	Database db = new Database();
+
+	public List<Person> getPeople() {
+		return db.getPeople();
+	}
 
 	public void addPerson(FormEvent e) {
 		String name = e.getName();
